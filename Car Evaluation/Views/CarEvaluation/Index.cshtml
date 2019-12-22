@@ -1,0 +1,94 @@
+﻿@model Car_EvaluationML.Model.ModelInput
+
+@{
+    ViewData["Title"] = "Evaluate";
+}
+
+<h4>Evaluate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Buying" class="control-label"></label>
+                <select asp-for="Buying" class="form-control">
+                    <option value="vhigh">VHigh</option>
+                    <option value="high">High</option>
+                    <option value="med">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <span asp-validation-for="Buying" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Maint" class="control-label"></label>
+                <select asp-for="Maint" class="form-control">
+                    <option value="vhigh">VHigh</option>
+                    <option value="high">High</option>
+                    <option value="med">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <span asp-validation-for="Maint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doors" class="control-label"></label>
+                <select asp-for="Doors" class="form-control">
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5more">Five or More</option>
+                </select>
+                <span asp-validation-for="Doors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persons" class="control-label"></label>
+                <select asp-for="Persons" class="form-control">
+                    <option value="2">Two</option>
+                    <option value="4">Four</option>
+                    <option value="more">More</option>
+                </select>
+                <span asp-validation-for="Persons" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bug_boot" class="control-label"></label>
+                <select asp-for="Bug_boot" class="form-control">
+                    <option value="small">Small</option>
+                    <option value="med">Medium</option>
+                    <option value="big">Big</option>
+                </select>
+                <span asp-validation-for="Bug_boot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Safety" class="control-label"></label>
+                <select asp-for="Safety" class="form-control">
+                    <option value="low">Low</option>
+                    <option value="med">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <span asp-validation-for="Safety" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Evaluate" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="offset-2 col-md-4">
+        <div class="form-group">
+            @if (ViewBag.Prediction != null)
+            {
+                <label>Class:</label>
+                <h6>@ViewBag.Prediction.Prediction</h6>
+                <label>Score:</label>
+        <h6>
+            @foreach (var item in ViewBag.Prediction.Score as float[])
+            {
+            <span>@item ,</span>
+            }
+        </h6>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
